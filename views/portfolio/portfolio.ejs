@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SOULART</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <style> 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    /* General styles */
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      color: #fff;
+      background: #F7F9F2;
+      overflow-x: hidden;
+    }
+    .navbar {
+      font-family: 'Poppins', sans-serif;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: background 0.3s ease-in-out;
+      
+    }
+
+    .navbar .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .navbar ul li {
+      position: relative;
+    }
+
+    .navbar ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem; /* Medium font size */
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s ease-in-out;
+    }
+
+    .navbar ul li a:hover {
+      color: #ffdd40;
+    }
+
+    /* Hamburger Menu */
+    .menu-toggle {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .menu-toggle.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .navbar ul {
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #1c1c1c;
+        padding: 1rem 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .navbar ul.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .navbar ul li {
+        margin: 1rem 0;
+        text-align: center;
+      }
+    }
+
+    /* Header Section */
+    .portfolio-header {
+      text-align: center;
+      padding: 5.5rem 1rem;
+      position: relative;
+      margin-top: 3rem;
+    }
+
+    .header-title {
+      font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive font size */
+      font-weight: bold;
+      margin: 0;
+      color: #111;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-subtitle {
+      font-size: clamp(1rem, 3vw, 1.5rem); /* Responsive font size */
+      margin-top: 0.8rem;
+      color: #333;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Portfolio Gallery */
+    .portfolio-gallery {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .portfolio-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 700px; /* Portrait size */
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .portfolio-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .item-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .portfolio-item:hover .item-overlay {
+      opacity: 1;
+    }
+
+    .item-overlay h3 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+
+    @media (max-width: 768px) {
+        .portfolio-gallery {
+          grid-template-columns: repeat(1, minmax(200px, 1fr)); /* Single column */
+          gap: 1.5rem;
+          padding: 1rem;
+        }
+      
+        .portfolio-item img {
+          height: 500px; /* Adjust image height */
+        }
+      
+        .item-overlay h3 {
+          font-size: 1.2rem;
+        }
+      }
+      
+      /* For phones and smaller devices */
+      @media (max-width: 480px) {
+        .portfolio-gallery {
+          grid-template-columns: repeat(1, 1fr); /* Single column */
+          gap: 2rem;
+          padding: 0.9rem;
+        }
+      
+        .portfolio-item img {
+          height: 450px; /* Adjust image height */
+        }
+      
+        .item-overlay h3 {
+          font-size: 1rem;
+        }
+      }
+
+    .running-banner {
+        background: linear-gradient(90deg, #8e44ad, #3498db);
+        color: white;
+        padding: 1rem 0;
+        font-size: 1rem;
+        text-align: center;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 1000;
+        overflow: hidden;
+      }
+  
+      .running-banner span {
+        display: inline-block;
+        white-space: nowrap;
+        animation: scroll 15s linear infinite;
+      }
+  
+      @keyframes scroll {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-100%); }
+      }
+  
+      .running-banner a {
+        color: #fff;
+        text-decoration: underline;
+        margin: 0 0.5rem;
+      }
+  
+      .running-banner a:hover {
+        text-decoration: none;
+        color: #f1c40f;
+      }
+
+      .button {
+        line-height: 1;
+        text-decoration: none;
+        display: inline-flex;
+        border: none;
+        cursor: pointer;
+        align-items: center;
+        gap: 0.75rem;
+        background-color: var(--clr);
+        color: #fff;
+        border-radius: 10rem;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        padding-left: 20px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: background-color 0.3s;
+        
+      }
+      
+      .button__icon-wrapper {
+        flex-shrink: 0;
+        width: 25px;
+        height: 25px;
+        position: relative;
+        color: var(--clr);
+        background-color: #fff;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+      
+      .button:hover {
+        background-color: #000;
+      }
+      
+      .button:hover .button__icon-wrapper {
+        color: #000;
+      }
+      
+      .button__icon-svg--copy {
+        position: absolute;
+        transform: translate(-150%, 150%);
+      }
+      
+      .button:hover .button__icon-svg:first-child {
+        transition: transform 0.3s ease-in-out;
+        transform: translate(150%, -150%);
+      }
+      
+      .button:hover .button__icon-svg--copy {
+        transition: transform 0.3s ease-in-out 0.1s;
+        transform: translate(0);
+      }
+      .button-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5rem 1rem;
+      }
+      
+      .rainbow-hover {
+        font-size: 16px;
+        font-weight: 700;
+        color: #ff7576;
+        background-color: #2B3044;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 12px 24px;
+        position: relative;
+        line-height: 24px;
+        border-radius: 9px;
+        box-shadow: 0px 1px 2px #2B3044,
+          0px 4px 16px #2B3044;
+        transform-style: preserve-3d;
+        transform: scale(var(--s, 1)) perspective(600px)
+          rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+        perspective: 600px;
+        transition: transform 0.1s;
+      }
+      
+      .sp {
+        background: linear-gradient(
+            90deg,
+            #866ee7,
+            #ea60da,
+            #ed8f57,
+            #fbd41d,
+            #2cca91
+          );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-fill-color: transparent;
+        display: block;
+      }
+      
+      .rainbow-hover:active {
+        transition: 0.3s;
+        transform: scale(0.93);
+      }
+      .btn-order{
+        text-align:right;
+        margin-right:2rem;
+      }
+
+      
+.footer {
+    background-color: #f4f4f4;
+    padding: 40px 20px;
+    color: #333;
+    text-align: left;
+    margin-bottom:3rem;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .footer-column {
+    flex: 1;
+    min-width: 220px;
+    margin: 10px;
+  }
+  
+  .footer-column h3 {
+    font-size: 1.5rem;
+    color: #7808d0;
+    margin-bottom: 15px;
+  }
+  
+  .footer-column p {
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+  
+  .footer-column ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-column ul li {
+    margin-bottom: 8px;
+  }
+  
+  .footer-column ul li a {
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .footer-column ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  .social-icons a {
+    margin-right: 10px;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+  }
+  
+  .footer-bottom p {
+    margin: 5px 0;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+  
+    .footer-column {
+        margin: 15px 0;
+        text-align: center;
+    }
+  }
+  
+
+     
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <img class="logo" style="height:80px;" src="startup_logo.jpg" >
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+      <li><a href="/order">Order Art</a></li>
+      <li><a href="/about">About Us</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <div class="menu-toggle">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header class="portfolio-header">
+    <h1 class="header-title">Custom Art Portfolio</h1>
+    <p class="header-subtitle">Explore our exclusive portfolio of handcrafted charcoal, pencil, and pastel sketches. Witness the artistry behind every stroke, and let us create a masterpiece for you!</p>
+  </header>
+
+  
+  <div class="btn-order">
+    <a href="#">
+    <button data-label="Register" class="rainbow-hover">
+        <span class="sp">Create your portrait.</span>
+      </button>
+    </a>
+          
+</div>
+
+  <div class="running-banner">
+    <span>
+      📞 Contact us for orders: <a href="tel:+123456789">+123456789</a> | ✉ Email: <a href="mailto:contact@artportfolio.com">contact@artportfolio.com</a> | 📍 Visit our website for more: <a href="#">www.artportfolio.com</a>
+    </span>
+  </div>
+
+  <!-- Portfolio Gallery -->
+  <section class="portfolio-gallery">
+    <div class="portfolio-item">
+      <img src="https://imgs.search.brave.com/taRRcQHSjU4yAgyfFSPtkqJ3eOdIDJ7EwOekkGdfD2w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9wYWlu/dGluZ3ZhbGxleS5j/b20vZHJhd2luZ3Mv/Z2lybC1wb3J0cmFp/dC1kcmF3aW5nLTEu/anBn" alt="Artwork 1">
+      <div class="item-overlay">
+        <h3>Charcoal Sketch</h3>
+        <p>The essence of charcoal sketch with mesmerizing artistic flair.</p>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <img src="https://imgs.search.brave.com/taRRcQHSjU4yAgyfFSPtkqJ3eOdIDJ7EwOekkGdfD2w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9wYWlu/dGluZ3ZhbGxleS5j/b20vZHJhd2luZ3Mv/Z2lybC1wb3J0cmFp/dC1kcmF3aW5nLTEu/anBn" alt="Artwork 2">
+      <div class="item-overlay">
+        <h3>Pastel Portrait</h3>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <img src="https://imgs.search.brave.com/taRRcQHSjU4yAgyfFSPtkqJ3eOdIDJ7EwOekkGdfD2w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9wYWlu/dGluZ3ZhbGxleS5j/b20vZHJhd2luZ3Mv/Z2lybC1wb3J0cmFp/dC1kcmF3aW5nLTEu/anBn" alt="Artwork 3">
+      <div class="item-overlay">
+        <h3>Pencil Sketch</h3>
+      </div>
+    </div>
+    <div class="portfolio-item">
+        <img src="https://imgs.search.brave.com/taRRcQHSjU4yAgyfFSPtkqJ3eOdIDJ7EwOekkGdfD2w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9wYWlu/dGluZ3ZhbGxleS5j/b20vZHJhd2luZ3Mv/Z2lybC1wb3J0cmFp/dC1kcmF3aW5nLTEu/anBn" alt="Artwork 1">
+        <div class="item-overlay">
+          <h3>Charcoal Sketch</h3>
+          <p>The essence of charcoal sketch with mesmerizing artistic flair.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="https://imgs.search.brave.com/taRRcQHSjU4yAgyfFSPtkqJ3eOdIDJ7EwOekkGdfD2w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9wYWlu/dGluZ3ZhbGxleS5j/b20vZHJhd2luZ3Mv/Z2lybC1wb3J0cmFp/dC1kcmF3aW5nLTEu/anBn" alt="Artwork 1">
+        <div class="item-overlay">
+          <h3>Charcoal Sketch</h3>
+          <p>The essence of charcoal sketch with mesmerizing artistic flair.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="https://imgs.search.brave.com/taRRcQHSjU4yAgyfFSPtkqJ3eOdIDJ7EwOekkGdfD2w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9wYWlu/dGluZ3ZhbGxleS5j/b20vZHJhd2luZ3Mv/Z2lybC1wb3J0cmFp/dC1kcmF3aW5nLTEu/anBn" alt="Artwork 1">
+        <div class="item-overlay">
+          <h3>Charcoal Sketch</h3>
+          <p>The essence of charcoal sketch with mesmerizing artistic flair.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="https://imgs.search.brave.com/taRRcQHSjU4yAgyfFSPtkqJ3eOdIDJ7EwOekkGdfD2w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9wYWlu/dGluZ3ZhbGxleS5j/b20vZHJhd2luZ3Mv/Z2lybC1wb3J0cmFp/dC1kcmF3aW5nLTEu/anBn" alt="Artwork 1">
+        <div class="item-overlay">
+          <h3>Charcoal Sketch</h3>
+          <p>The essence of charcoal sketch with mesmerizing artistic flair.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="https://imgs.search.brave.com/taRRcQHSjU4yAgyfFSPtkqJ3eOdIDJ7EwOekkGdfD2w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9wYWlu/dGluZ3ZhbGxleS5j/b20vZHJhd2luZ3Mv/Z2lybC1wb3J0cmFp/dC1kcmF3aW5nLTEu/anBn" alt="Artwork 1">
+        <div class="item-overlay">
+          <h3>Charcoal Sketch</h3>
+          <p>The essence of charcoal sketch with mesmerizing artistic flair.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="https://imgs.search.brave.com/taRRcQHSjU4yAgyfFSPtkqJ3eOdIDJ7EwOekkGdfD2w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9wYWlu/dGluZ3ZhbGxleS5j/b20vZHJhd2luZ3Mv/Z2lybC1wb3J0cmFp/dC1kcmF3aW5nLTEu/anBn" alt="Artwork 1">
+        <div class="item-overlay">
+          <h3>Charcoal Sketch</h3>
+          <p>The essence of charcoal sketch with mesmerizing artistic flair.</p>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <img src="https://imgs.search.brave.com/taRRcQHSjU4yAgyfFSPtkqJ3eOdIDJ7EwOekkGdfD2w/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9wYWlu/dGluZ3ZhbGxleS5j/b20vZHJhd2luZ3Mv/Z2lybC1wb3J0cmFp/dC1kcmF3aW5nLTEu/anBn" alt="Artwork 1">
+        <div class="item-overlay">
+          <h3>Charcoal Sketch</h3>
+          <p>The essence of charcoal sketch with mesmerizing artistic flair.</p>
+        </div>
+      </div>
+  </section>
+
+  <div class="button-container"> 
+    <a href="#">
+  <button href="#" class="button" style="--clr: #7808d0">
+    <span class="button__icon-wrapper">
+      <svg
+        viewBox="0 0 14 15"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="button__icon-svg"
+        width="10"
+      >
+        <path
+          d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+          fill="currentColor"
+        ></path>
+      </svg>
+  
+      <svg
+        viewBox="0 0 14 15"
+        fill="none"
+        width="10"
+        xmlns="http://www.w3.org/2000/svg"
+        class="button__icon-svg button__icon-svg--copy"
+      >
+        <path
+          d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
+          fill="currentColor"
+        ></path>
+      </svg>
+    </span>
+    Order Now.
+  </button>
+</a>
+</div>
+
+<section>
+    <footer class="footer">
+      <div class="footer-container">
+          <div class="footer-column">
+              <h3>About Us</h3>
+              <p>Custom Portrait Services specializes in personalized hand-drawn portraits tailored to your needs. We aim to bring your cherished memories to life with exceptional artistry.</p>
+          </div>
+          <div class="footer-column">
+              <h3>Quick Links</h3>
+              <ul>
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#">Portfolio</a></li>
+                  <li><a href="#">Services</a></li>
+                  <li><a href="#">FAQs</a></li>
+                  <li><a href="#">Contact Us</a></li>
+              </ul>
+          </div>
+          <div class="footer-column">
+              <h3>Contact Us</h3>
+              <p>Email: <a href="mailto:support@customportraits.com">support@customportraits.com</a></p>
+              <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+              <p>Address: 123 Art Lane, Kolkata, India</p>
+          </div>
+          <div class="footer-column">
+              <h3>Follow Us</h3>
+              <div class="social-icons">
+                  <a href="#" aria-label="Facebook"><img src="facebook-icon.png" alt="Facebook"></a>
+                  <a href="#" aria-label="Instagram"><img src="instagram-icon.png" alt="Instagram"></a>
+                  <a href="#" aria-label="Twitter"><img src="twitter-icon.png" alt="Twitter"></a>
+                  <a href="#" aria-label="LinkedIn"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+              </div>
+          </div>
+      </div>
+      <div class="footer-bottom">
+          <p>&copy; 2024 Custom Portrait Services. All rights reserved.</p>
+          <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+      </div>
+  </footer>
+  </section>
+  
+  
+  <!-- GSAP Animations -->
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navbarLinks = document.querySelector('.navbar ul');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navbarLinks.classList.toggle('active');
+    });
+
+    // Header animation
+    gsap.from(".header-title", { duration: 1, y: -50, opacity: 0, ease: "power2.out" });
+    gsap.from(".header-subtitle", { duration: 1.2, y: 50, opacity: 0, delay: 0.3, ease: "power2.out" });
+
+    // Gallery items animation
+    gsap.from(".portfolio-item", {
+      duration: 1,
+      y: 50,
+      opacity: 0,
+      stagger: 0.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".portfolio-gallery",
+        start: "top 80%",
+        toggleActions: "play none none none"
+      }
+    });
+  </script>
+</body>
+</html>

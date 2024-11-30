@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOULART</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* General Reset */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        /* Watermark */
+        .watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            color: rgba(200, 200, 200, 0.2);
+            z-index: 0;
+            font-weight: bold;
+            white-space: nowrap;
+            pointer-events: none;
+        }
+        /* Logo */
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo img {
+            max-width: 120px;
+            border-radius: 50%;
+        }
+        /* Invoice Section */
+        .invoice-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .invoice-header h1 {
+            margin: 0;
+            color: #555;
+        }
+        .invoice-details, .user-details {
+            margin: 20px 0;
+            padding: 10px 0;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+        }
+        .invoice-details div, .user-details div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .invoice-details div:last-child, .user-details div:last-child {
+            margin-bottom: 0;
+        }
+        .invoice-details div span, .user-details div span {
+            font-weight: bold;
+        }
+        /* Partner Logos */
+        .partners {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .partners img {
+            margin: 10px;
+            max-width: 80px;
+            vertical-align: middle;
+        }
+        /* Contact Info */
+        .contact-info {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #666;
+            text-align:center;
+            line-height:20px;
+        }
+        .btn-download {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .btn-download:hover {
+            background-color: #45a049;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container" id="invoice">
+        <div class="watermark">SOULART</div>
+        <div class="logo">
+            <img src="/startup_logo.jpg" alt="SOULART Logo">
+        </div>
+        <div class="invoice-header">
+            <h1>SOULART Invoice</h1>
+            <p>Transforming moments into timeless art!</p>
+            <p>OrderId: <%=orderDetails._id %></p>
+        </div>
+
+        <!-- User Details -->
+        <div class="user-details">
+            <div><span>Name:</span><span><%=orderDetails.name %></span></div>
+            <div><span>Address:</span><span id="address"><%= orderDetails.address %></span></div>
+            <div><span>Contact:</span><span><%= orderDetails.contactNumber %></span></div>
+            <div><span>Whatsapp number:</span><span><%= orderDetails.whatsappNumber %></span></div>
+        </div>
+
+        <!-- Invoice Details -->
+        <div class="invoice-details">
+            <div><span>Portrait Type:</span><span><%= orderDetails.artType %></span></div>
+            <div><span>Frame Size:</span><span><%= orderDetails.frameSize %></span></div>
+            <div><span>Total Price:</span><span><%= orderDetails.price %></span></div>
+            <div><span>You need to pay 40% in Advance:</span><span><%= (orderDetails.price * 0.4).toFixed(2) %></span></div>
+        </div>
+        <i>Note: Our executive contact you for 40% advanced payment. </i>
+
+        <!-- Partners Section -->
+        <div class="partners">
+            <h3>Our Trusted Partners</h3>
+            <p>Payment Partners:</p>
+            <img src="/google-pay.png" alt="Google Pay">
+            <img src="/phonepe-icon.png" alt="Phone Pay">
+            <img src="/paytm-icon.png" alt="Paytm">
+            <img src="/upi-icon.png" alt="UPI">
+            <p>Delivery Partners:</p>
+            <img style="background-color: black;" src="/delhivery.png" alt="Delhivery">
+            <img src="/ekart.png" alt="Ekart">
+        </div>
+
+        <!-- Contact Info -->
+        <div class="contact-info">
+            <p>For queries, contact our executive at <i class="fa-solid fa-phone" style="color:black;"></i> <b>+91 9876543210</b> or WhatsApp us at <i class="fa-brands fa-whatsapp" style="color:green;"></i> <b>+91 9876543211</b>.</p>
+        </div>
+
+        <!-- Download Button -->
+        <button id="downloadButton" class="btn-download">Download Receipt</button>
+    </div>
+
+    <!-- Include jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script>
+        document.getElementById("downloadButton").addEventListener("click", function () {
+            const invoice = document.getElementById("invoice");
+
+            html2canvas(invoice, { scale: 2 }).then((canvas) => {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF('p', 'mm', 'a4');
+
+                // Convert canvas to image
+                const imgData = canvas.toDataURL("image/png");
+                const imgWidth = 210; // A4 width in mm
+                const pageHeight = 297; // A4 height in mm
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                let heightLeft = imgHeight;
+                let position = 0;
+
+                doc.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    doc.addPage();
+                    doc.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                doc.save("SOULART_Invoice.pdf");
+            });
+        });
+    </script>
+</body>
+</html>

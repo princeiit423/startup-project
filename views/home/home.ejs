@@ -1,0 +1,2094 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>SOULART</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+
+      }
+      html, body {
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+      }
+      .page1 {
+        height: 120vh;
+        width: 100%;
+      }
+      
+    /* Navbar Styling */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background:linear-gradient(90deg, #6a11cb, #2575fc);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: background-color 0.3s ease-in-out;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .navbar .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .navbar ul li {
+      position: relative;
+    }
+
+    .navbar ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem; /* Medium font size */
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s ease-in-out;
+    }
+
+    .navbar ul li a:hover {
+      color: #ffdd40;
+    }
+
+    /* Hamburger Menu */
+    .menu-toggle {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .menu-toggle.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .navbar ul {
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #1c1c1c;
+        padding: 1rem 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .navbar ul.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .navbar ul li {
+        margin: 1rem 0;
+        text-align: center;
+      }
+    }
+      .hero-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 40px 20px;
+      }
+    
+      .hero-section .info h1 {
+        font-weight: 900;
+        font-size: 2.5rem;
+      }
+      .hero-section .info p {
+        font-size: 1rem;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        max-width: 600px;
+      }
+
+
+      .button {
+        line-height: 1;
+        text-decoration: none;
+        display: inline-flex;
+        border: none;
+        cursor: pointer;
+        align-items: center;
+        gap: 0.75rem;
+        background-color: var(--clr);
+        color: #fff;
+        border-radius: 10rem;
+        font-weight: 600;
+        padding: 0.75rem 1.5rem;
+        padding-left: 20px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: background-color 0.3s;
+      }
+      .button:hover {
+        background-color: #000;
+      }
+      .hero-img {
+        max-width: 100%;
+        border-radius: 10px;
+        margin-top: 20px;
+      }
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        flex-wrap:wrap;
+      }
+      /* Adjustments for larger screens */
+      @media (min-width: 768px) {
+        .hero-section {
+          flex-direction: row;
+          justify-content: space-between;
+          text-align: left;
+        }
+        .container{
+          padding:0px 0px 0px 50px;
+        }
+        .info h1 {
+          font-size: 3.5rem;
+        }
+        .info p {
+          font-size: 1.2rem;
+        }
+      }
+
+      
+      
+      /* Responsive for page2 and page3 */
+      .page2 {
+        height: 100%;
+        width: 100%;
+        padding: 40px 20px;
+      }
+      .thrive h1 {
+        font-size: 2.5rem;
+        text-align: center;
+        font-weight: 600;
+        padding-bottom: 20px;
+      }
+      .points h2 {
+        font-size: 1.8rem;
+        padding: 20px 30px;
+        text-align: left;
+      }
+      hr {
+        margin: 0px 30px;
+      }
+
+      /* Responsive for smaller devices */
+      @media (min-width: 768px) {
+        .thrive h1 {
+          font-size: 4rem;
+        }
+        .points h2 {
+          padding-left: 150px;
+          font-size: 2.5rem;
+        }
+        hr {
+          margin: 0px 80px;
+        }
+      }
+      
+
+      /* Responsive styles for page3 */
+      .page3 {
+        height: auto;
+        width: 100%;
+        padding: 40px 20px;
+      }
+      .page3 h1 {
+        text-align: center;
+        font-size: 3.5rem;
+        font-weight: 700;
+        padding: 20px 0;
+        margin-bottom:3rem;
+        margin-top:12rem;
+      }
+      
+      .card {
+        overflow: hidden;
+        height: auto;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+      }
+      .card img {
+        height: auto;
+        width: 100%;
+        max-height: 300px;
+        object-fit: cover;
+      }
+      .card h3 {
+        padding: 20px;
+      }
+      .card p {
+        padding: 0 20px 20px 20px;
+      }
+
+      /* Adjustments for larger screens */
+      @media (min-width: 768px) {
+        .container {
+          flex-direction: row;
+        }
+        .card {
+          width: 30%;
+        }
+      }
+      .link-tag{
+        text-decoration:none;
+        color:black;
+      }
+
+      .page4{
+        height:auto;
+        width:100%;
+      }
+
+      .page4 .container1{
+        display:flex;
+        flex-direction:row;
+        height: 40%;
+
+      }
+      .orders{
+        width: 40%;
+        color:white;
+        background-color:black;
+        padding:50px;
+        font-size:3rem;
+        padding-top:100px;
+        border-radius:50px;
+
+      }
+      .orders h2{
+        font-size:2rem;
+      }
+
+      .order-detail{
+        width:60%;
+        padding:60px;
+        background-color:wheat;
+        font-size:1.2rem;
+        border-radius:50px;
+      }
+      .customer h1{
+        text-align:center;
+        font-size: 3rem;
+        font-weight:500;
+        padding-top:70px;
+      }
+
+      .order-section {
+        background-color: #f8f9fa; /* Light background for contrast */
+        padding: 60px 20px; /* Top and bottom padding */
+        margin: 40px 0; /* Space above and below the section */
+        border-radius: 15px; /* Rounded corners */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+      }
+    
+      .steps {
+        display: flex;
+        flex-direction: column;
+        gap: 20px; /* Space between steps */
+        max-width: auto;; /* Limit the width for better readability */
+        margin: auto; /* Center the steps */
+      }
+    
+      .step {
+        display: flex; /* Flexbox for alignment */
+        align-items: center; /* Center vertically */
+        background-color: #ffffff; /* White background for each step */
+        padding: 15px; /* Padding for the step box */
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        transition: transform 0.3s; /* Smooth hover effect */
+      }
+    
+      .step:hover {
+        transform: scale(1.02); /* Slightly enlarge on hover */
+      }
+    
+      .step-number {
+        background-color: #7808d0; /* Color for step number */
+        color: white; /* White text */
+        border-radius: 50%; /* Circle shape */
+        width: 50px; /* Fixed width */
+        height: 50px; /* Fixed height */
+        display: flex; /* Flexbox for centering */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        font-weight: bold; /* Bold text */
+        margin-right: 10px; /* Space between number and text */
+      }
+    
+      .step-info {
+        font-size: 1.1rem; /* Slightly larger text */
+        color: #333; /* Darker text color */
+        text-wrap:wrap;
+      }
+    
+      /* Responsive styles */
+      @media (min-width: 768px) {
+        .steps {
+          flex-direction: row; /* Row layout for larger screens */
+          justify-content: space-between; /* Space out the steps */
+        }
+    
+        .step {
+          flex: 1; /* Equal width for steps */
+          margin: 0 10px; /* Margin between steps */
+        }
+        
+      }
+      .order-now{
+        text-align:center;
+      }
+      .testimonial{
+        padding:2rem;
+        justify-content:space-around;
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+      }
+      .testimonial .box{
+        display:flex;
+        flex-direction:column;
+        flex-wrap:nowrap;
+        height:auto;
+        width:30%;
+        border-color:transparent;
+        padding:5px;
+        align-items:center;
+        border-radius:3rem;
+        backdrop-filter:blur(10px);
+        background-color:#7808d0;
+        margin:10px;
+      }
+      .testimonial .box:hover{
+        scale:1.02;
+        transition:0.4s;
+      }
+      .testimonial .box .image{
+        
+        height: 50px;
+        width:50px;
+        border-radius:100%;
+        text-align:center;
+        background-image:url("faiz_dp.jpg");
+        background-size:contain;
+        background-repeat:no-repeat;
+        margin:2%;
+        
+      }
+      .testimonial .box p{
+        text-wrap:wrap;
+        font-size:smaller;
+        text-align:center;
+        padding:1.25rem;
+        color:white;
+      }
+      .testimonial .box i{
+        color:white;
+       }
+
+       @media (max-width: 1024px) {
+        .testimonial .box {
+            width: 45%; /* Increase width for medium screens */
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .testimonial {
+            flex-direction: column;
+            align-items: center; /* Stack boxes vertically */
+        }
+    
+        .testimonial .box {
+            width: 80%; /* Make boxes take up more width */
+            margin-bottom: 20px;
+        }
+    
+        .testimonial .box p {
+            font-size: 14px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .testimonial .box {
+            width: 90%; /* Almost full width for small screens */
+            padding: 10px; /* Less padding */
+            margin-bottom: 15px;
+        }
+    
+        .testimonial .box .image {
+            height: 40px;
+            width: 40px; /* Adjust image size for smaller screens */
+        }
+    
+        .testimonial .box p {
+            font-size: 12px;
+            padding: 10px; /* Less padding for smaller text */
+        }
+    
+        .testimonial .box i {
+            font-size: 12px;
+        }
+    }
+
+     .page5{
+      height:auto;
+      width:100%;
+     } 
+     .page5 .wrapup{
+      text-align:center;
+     }
+     .page5 .flow{
+      display:flex;
+      flex-direction:row;
+     }
+     .page5 .flow .image{
+      border-radius:100%;
+      background-image:url("filter.png");
+      background-size:contain;
+      background-repeat:no-repeat;
+    
+      height:100px;
+      width:100px;
+      position:relative;
+      left:30%;
+      
+     }
+    .block{
+        padding:3rem;
+        height: auto;
+        width: 25%;
+        text-align:center;
+        display:flex;
+        flex-direction:column;
+        justify-items:center;
+     }
+     
+    .block h2{
+      margin-top:4rem;
+     }
+     .block p{
+      font-size:small;
+      color:black;
+     }
+
+     @media (max-width: 1024px) {
+      .block {
+          width: 45%; /* Adjust width for tablets and medium screens */
+      }
+  
+      .page5 .flow .image {
+          height: 80px;
+          width: 80px;
+      }
+  }
+  
+  @media (max-width: 768px) {
+      .block {
+          width: 100%; /* Full width for small screens */
+          padding: 1.5rem;
+      }
+  
+      .page5 .flow {
+          flex-direction: column; /* Stack blocks vertically */
+          align-items: center;
+      }
+  
+      .page5 .flow .image {
+          height: 70px;
+          width: 70px;
+      }
+      
+      .block h2 {
+          margin-top: 1.5rem;
+      }
+  
+      .block p {
+          font-size: 14px;
+      }
+  }
+  
+  @media (max-width: 480px) {
+      .block {
+          padding: 1rem; /* Reduced padding for mobile screens */
+          width: 100%;
+      }
+  
+      .page5 .flow .image {
+          height: 60px;
+          width: 60px;
+      }
+  
+      .block h2 {
+          font-size: 1.2rem;
+      }
+  
+      .block p {
+          font-size: 12px;
+      }
+  }
+
+  .how-it-works {
+    padding: 3rem 1rem;
+    text-align: center;
+    background-color: #f0f7ff;
+    color: #333;
+}
+
+.how-it-works h2 {
+    font-size: 2.5rem;
+    color: #4a6c8c;
+    margin-bottom: 1rem;
+}
+
+.how-it-works p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    color: #666;
+}
+
+/* Steps Container */
+.steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Individual Step */
+.step {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display:flex;
+    flex-direction:column;
+}
+
+.step:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.step h3 {
+    font-size: 1.25rem;
+    color: #4a6c8c;
+    margin-bottom: 0.5rem;
+}
+
+.step p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .how-it-works h2 {
+        font-size: 2rem;
+    }
+    .steps-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.customer-gallery-section {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #f3f3f3;
+}
+
+.customer-gallery-section h2 {
+  font-size: 2rem;
+  color: #4a4a4a;
+  margin-bottom: 0.5rem;
+}
+
+.customer-gallery-section p {
+  font-size: 1rem;
+  color: #6a6a6a;
+  margin-bottom: 2rem;
+}
+
+/* Gallery Grid */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+  transform: scale(1.05);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Overlay for Captions */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.gallery-item:hover .overlay {
+  opacity: 1;
+}
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.lightbox-image {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+}
+
+.featured-artists-section {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #fafafa;
+}
+
+.featured-artists-section h2 {
+  font-size: 2.5rem;
+  color: #4a4a4a;
+  margin-bottom: 0.5rem;
+}
+
+.featured-artists-section p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+/* Artists Grid */
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Artist Card */
+.artist-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.artist-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.artist-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin: 0 auto 1rem auto;
+  background-size: cover;
+  background-position: center;
+}
+
+.artist-card h3 {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.artist-card p {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.bio {
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: 0.5rem;
+}
+
+/* Responsive Styling */
+@media (max-width: 600px) {
+  .featured-artists-section h2 {
+      font-size: 2rem;
+  }
+  .artist-card {
+      padding: 1rem;
+  }
+}
+
+.customer-stories {
+  padding: 3rem 1rem;
+  text-align: center;
+  background-color: #f0f8ff;
+}
+
+.customer-stories h2 {
+  font-size: 2.5rem;
+  color: #4a4a4a;
+  margin-bottom: 0.5rem;
+}
+
+.customer-stories p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+/* Stories Container */
+.stories-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Story Card */
+.story-card {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.story-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.story-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 1rem;
+}
+
+.story-card blockquote {
+  font-size: 0.95rem;
+  color: #555;
+  font-style: italic;
+  text-align: center;
+  line-height: 1.5;
+  margin: 0 0 1rem;
+}
+
+.customer-name {
+  font-size: 0.85rem;
+  color: #777;
+  font-weight: bold;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .customer-stories h2 {
+      font-size: 2rem;
+  }
+  .stories-container {
+      grid-template-columns: 1fr;
+  }
+}
+
+.art-quiz-section {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #fff8f0;
+  color: #333;
+}
+
+.art-quiz-section h2 {
+  font-size: 2rem;
+  color: #4a4a4a;
+  margin-bottom: 1rem;
+}
+
+.art-quiz-section p {
+  font-size: 1rem;
+  color: #6a6a6a;
+  margin-bottom: 2rem;
+}
+
+.quiz-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fefefe;
+}
+
+.quiz-question {
+  margin-bottom: 1.5rem;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quiz-option {
+  background-color: #7808d0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.quiz-option:hover {
+  background-color: #5900a5;
+}
+
+#result-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.restart-button {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #7808d0;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.restart-button:hover {
+  background-color: #5900a5;
+}
+
+/* Responsive Styling */
+@media (max-width: 600px) {
+  .quiz-container {
+      width: 90%;
+  }
+
+  .art-quiz-section h2 {
+      font-size: 1.5rem;
+  }
+}
+
+.limited-deals {
+  padding: 3rem 1rem;
+  text-align: center;
+  background: #ffe5b4; /* Light peach background */
+  color: #333;
+}
+
+.limited-deals h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #b85c38; /* Warm brown color */
+}
+
+.limited-deals p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: #666;
+}
+
+/* Deals Container */
+.deals-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Deal Card */
+.deal-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deal-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.deal-image {
+  width: 100%;
+  height: 150px;
+  border-radius: 8px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 1rem;
+}
+
+.deal-card h3 {
+  font-size: 1.25rem;
+  color: #b85c38;
+  margin-bottom: 0.5rem;
+}
+
+.deal-card p {
+  font-size: 0.9rem;
+  color: #555;
+  text-align: center;
+}
+
+.claim-offer-btn {
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #b85c38;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.claim-offer-btn:hover {
+  background-color: #8f3d21;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+  .limited-deals h2 {
+      font-size: 2rem;
+  }
+  .deals-container {
+      grid-template-columns: 1fr;
+  }
+}
+
+.contact-us {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+.contact-info {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.contact-info h2 {
+  font-size: 2.5rem;
+  color: #333;
+}
+
+.contact-info p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.info-item i {
+  font-size: 1.5rem;
+  color: #7808d0;
+  margin-right: 10px;
+}
+
+.contact-form {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h3 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.contact-form textarea {
+  height: 100px;
+}
+
+.contact-form button {
+  background-color: #7808d0;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.contact-form button:hover {
+  background-color: #000;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .contact-us {
+      flex-direction: column;
+  }
+  .contact-info {
+      margin-right: 0;
+      margin-bottom: 20px;
+  }
+}
+
+.faq-section {
+  background-color: #f9f9f9;
+  padding: 40px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  text-align: center;
+}
+
+.faq-section h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.faq-item {
+  margin: 15px 0;
+  text-align: left;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  transition: background-color 0.3s;
+}
+
+.faq-item:hover {
+  background-color: #f1f1f1;
+}
+
+.faq-question {
+  font-size: 1.2rem;
+  color: #7808d0;
+  cursor: pointer;
+  margin: 0;
+}
+
+.faq-answer {
+  font-size: 1rem;
+  color: #555;
+  display: none; /* Hide answer by default */
+}
+
+/* Show answer when the question is clicked */
+.faq-item.active .faq-answer {
+  display: block;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .faq-section {
+      padding: 20px 10px;
+  }
+  .faq-section h2 {
+      font-size: 2rem;
+  }
+}
+
+.footer {
+  background-color: #f4f4f4;
+  padding: 40px 20px;
+  color: #333;
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 220px;
+  margin: 10px;
+}
+
+.footer-column h3 {
+  font-size: 1.5rem;
+  color: #7808d0;
+  margin-bottom: 15px;
+}
+
+.footer-column p {
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.footer-column ul li a:hover {
+  text-decoration: underline;
+}
+
+.social-icons a {
+  margin-right: 10px;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.footer-bottom p {
+  margin: 5px 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .footer-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .footer-column {
+      margin: 15px 0;
+      text-align: center;
+  }
+}
+
+
+.art-preview-section {
+  text-align: center;
+  padding: 3rem 1rem;
+  background-color: #f8f8f8;
+}
+
+.art-preview-section h2 {
+  font-size: 2rem;
+  color: #4a4a4a;
+  margin-bottom: 0.5rem;
+}
+
+.art-preview-section p {
+  font-size: 1rem;
+  color: #6a6a6a;
+  margin-bottom: 1.5rem;
+}
+
+/* Upload Area Styling */
+.upload-area {
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+#uploadImage {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.upload-label {
+  background-color: #7808d0;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.upload-label:hover {
+  background-color: #5900a5;
+}
+
+/* Preview Container Styling */
+.preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preview-image {
+  margin-top: 1.5rem;
+  max-width: 70%; /* Responsive width for larger screens */
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.style-button {
+  margin-top: 1rem;
+  padding: 10px 20px;
+  background-color: #7808d0;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.style-button:hover {
+  background-color: #5900a5;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .art-preview-section h2 {
+      font-size: 1.5rem;
+  }
+
+  .art-preview-section p {
+      font-size: 0.9rem;
+  }
+
+  .preview-image {
+      max-width: 80%; /* Medium size for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .art-preview-section h2 {
+      font-size: 1.3rem;
+  }
+
+  .preview-image {
+      max-width: 90%; /* Smaller size for mobile */
+  }
+
+  .style-button {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+  }
+}
+
+#order{
+  background-image:url("order_now.jpg");
+  background-size:contain;
+  background-repeat:no-repeat;
+}
+#replacement{
+  background-image:url("recycle.png");
+  background-size:contain;
+  background-repeat:no-repeat;
+}
+#durable{
+  background-image:url("durable.jpg");
+  background-size:contain;
+  background-repeat:no-repeat;
+}
+
+.running-banner {
+  background: linear-gradient(90deg, #8e44ad, #3498db);
+  color: white;
+  padding: 1rem 0;
+  font-size: 1rem;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.running-banner span {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scroll 15s linear infinite;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.running-banner a {
+  color: #fff;
+  text-decoration: underline;
+  margin: 0 0.5rem;
+}
+
+.running-banner a:hover {
+  text-decoration: none;
+  color: #f1c40f;
+}
+
+  
+  
+    </style>
+  </head>
+  <body>
+    <div class="running-banner">
+      <span>
+        📞 Contact us for orders: <a href="tel:+918252410023">+918252410023</a> | ✉ Email: <a href="mailto:contact@artportfolio.com">contact@artportfolio.com</a> | 📍 Visit our website for more: <a href="#">www.artportfolio.com</a> | <i class="fa-brands fa-whatsapp"></i> Whatsapp us for orders : <a href="+918252410023">+918252410023</a>
+      </span>
+    </div>
+  
+    <div class="page1">
+        <!-- Navbar -->
+  <nav class="navbar">
+    <img class="logo" style="height:80px;" src="startup_logo.jpg" >
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+      <li><a href="/order">Order Art</a></li>
+      <li><a href="#page5">About Us</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <div class="menu-toggle">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+      <div class="hero-section container">
+        <div class="info">
+          <h1>Custom Portrait</h1>
+          <h1>Charcoal Portrait</h1>
+          <h1>Sketch Portrait</h1>
+          <p>
+            "Custom Portrait Services offers personalized hand-drawn portraits
+            tailored to your preferences. Whether you’re looking for a unique
+            gift or a timeless keepsake, we transform your favorite photos into
+            stunning works of art with attention to detail and craftsmanship."
+          </p>
+          <a href="#">
+            <button class="button" style="--clr: #7808d0">
+              Explore All
+            </button>
+          </a>
+        </div>
+        <div class="visual">
+          <img class="hero-img" src="sktch.jpg" alt="Sketch Image" />
+        </div>
+      </div>
+    </div>
+
+    <div class="page3">
+      <h1>Glimpses of our work</h2>    
+      <div class="container">
+        <div class="card"> 
+          <a class="link-tag" href="#">
+            <img src="https://www.shihoriobata.com/wp-content/uploads/2020/07/b0c927b9292914798a6d064953990309.jpg" alt="images" />
+          <h3>Charcoal Sketch</h3>
+          <p>
+            Experience the timeless beauty of charcoal sketch portraits, 
+            meticulously hand-drawn by skilled artists. Our custom charcoal 
+            sketches capture every detail with depth and precision, creating 
+            a striking blend of shadows and highlights.
+          </p>
+        </a>
+        </div>
+
+        <div class="card"> 
+            <a class="link-tag" href="#">
+          <img src="https://karabullockart.com/wp-content/uploads/bb-plugin/cache/HollyBealsSingleFemalePainting-768x1024-portrait-59aec658c6a280befcf04f999e159d2f-6kqc83r9a2wn.jpg" alt="images" />
+          <h3>Charcoal Sketch</h3>
+          <p>
+            Experience the timeless beauty of charcoal sketch portraits, 
+            meticulously hand-drawn by skilled artists. Our custom charcoal 
+            sketches capture every detail with depth and precision, creating 
+            a striking blend of shadows and highlights.
+          </p>
+        </a>
+        </div>
+
+        <div class="card"> 
+            <a class="link-tag" href="#">
+          <img src="https://imgs.search.brave.com/cJm_xHqHWDMkt-wS62EtZzxhZSTNfXQLjRLZsvTjqYA/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2M0LzRl/L2U2L2M0NGVlNjgy/M2Q5ZTQ1ZTM1OTJl/MWQ2MzYzNDBjZjc5/LmpwZw" alt="images" />
+          <h3>Charcoal Sketch</h3>
+          <p>
+            Experience the timeless beauty of charcoal sketch portraits, 
+            meticulously hand-drawn by skilled artists. Our custom charcoal 
+            sketches capture every detail with depth and precision, creating 
+            a striking blend of shadows and highlights.
+          </p>
+        </a>
+        </div>
+
+
+        <div class="card"> 
+          <a class="link-tag" href="#">
+            <img src="https://www.shihoriobata.com/wp-content/uploads/2020/07/b0c927b9292914798a6d064953990309.jpg" alt="images" />
+          <h3>Charcoal Sketch</h3>
+          <p>
+            Experience the timeless beauty of charcoal sketch portraits, 
+            meticulously hand-drawn by skilled artists. Our custom charcoal 
+            sketches capture every detail with depth and precision, creating 
+            a striking blend of shadows and highlights.
+          </p>
+        </a>
+        </div>
+
+        <div class="card"> 
+            <a class="link-tag" href="#">
+          <img src="https://karabullockart.com/wp-content/uploads/bb-plugin/cache/HollyBealsSingleFemalePainting-768x1024-portrait-59aec658c6a280befcf04f999e159d2f-6kqc83r9a2wn.jpg" alt="images" />
+          <h3>Charcoal Sketch</h3>
+          <p>
+            Experience the timeless beauty of charcoal sketch portraits, 
+            meticulously hand-drawn by skilled artists. Our custom charcoal 
+            sketches capture every detail with depth and precision, creating 
+            a striking blend of shadows and highlights.
+          </p>
+        </a>
+        </div>
+
+        <div class="card"> 
+            <a class="link-tag" href="#">
+          <img src="https://imgs.search.brave.com/cJm_xHqHWDMkt-wS62EtZzxhZSTNfXQLjRLZsvTjqYA/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2M0LzRl/L2U2L2M0NGVlNjgy/M2Q5ZTQ1ZTM1OTJl/MWQ2MzYzNDBjZjc5/LmpwZw" alt="images" />
+          <h3>Charcoal Sketch</h3>
+          <p>
+            Experience the timeless beauty of charcoal sketch portraits, 
+            meticulously hand-drawn by skilled artists. Our custom charcoal 
+            sketches capture every detail with depth and precision, creating 
+            a striking blend of shadows and highlights.
+          </p>
+        </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="page4"> 
+      <div class="order-section">
+        <div class="container">
+          <h2 class="text-center">How to Order Your Custom Portrait?</h2>
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-info">Select the type of art.</div>
+            </div>
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-info">Select the frame size.</div>
+            </div>
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-info">Pay 50% of total cost now rest on delivery.</div>
+            </div>
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-info">Send details via WhatsApp: <a href="https://wa.me/918252410023" style="color: #7808d0;">+91 82524 10023</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="order-now"><a href="#">
+        <button class="button" style="--clr: #7808d0">
+          Explore All
+        </button>
+      </a> </div>
+      
+      <div class="customer">
+      <h1>Customer Satisfaction our priority.</h1> 
+      <div class="testimonial"> 
+        <div class="box">
+          
+          <div class="image">  
+          </div>
+            <i>Ridhi, UttarPradesh</i>
+            <i>⭐⭐⭐⭐⭐</i>
+            <p>We love the art work of them and provide great service with excellence , delivery on time my husband is happy to see their custom portrait, We love the art work of them and provide great service with excellence , delivery on time my husband is happy to see their custom portrait</p>
+        </div>
+
+        <div class="box">
+          
+          <div class="image">  
+          </div>
+            <i>Ridhi, UttarPradesh</i>
+            <i>⭐⭐⭐⭐⭐</i>
+            <p>We love the art work of them and provide great service with excellence , delivery on time my husband is happy to see their custom portrait, We love the art work of them and provide great service with excellence , delivery on time my husband is happy to see their custom portrait</p>
+        </div>
+
+        <div class="box">
+          
+          <div class="image">  
+          </div>
+            <i>Ridhi, UttarPradesh</i>
+            <i>⭐⭐⭐⭐</i>
+            <p>We love the art work of them and provide great service with excellence , delivery on time my husband is happy to see their custom portrait, We love the art work of them and provide great service with excellence , delivery on time my husband is happy to see their custom portrait</p>
+        </div>
+
+        <div class="box">
+          
+          <div class="image">  
+          </div>
+            <i>Ridhi, UttarPradesh</i>
+            <i>⭐⭐⭐⭐</i>
+            <p>We love the art work of them and provide great service with excellence , delivery on time my husband is happy to see their custom portrait, We love the art work of them and provide great service with excellence , delivery on time my husband is happy to see their custom portrait</p>
+        </div>
+
+        <div class="box">
+          
+          <div class="image">  
+          </div>
+            <i>Ridhi, UttarPradesh</i>
+            <i>⭐⭐⭐⭐⭐</i>
+            <p>We love the art work of them and provide great service with excellence , delivery on time my husband is happy to see their custom portrait, We love the art work of them and provide great service with excellence , delivery on time my husband is happy to see their custom portrait</p>
+        </div>
+
+    </div>
+
+    <div class="page5" id="page5">
+      <div class="wrapup">
+      <h1>Why SoulArt ?</h1>  
+      <p style="text-align: center; padding: 30px; font-size: large; font-weight: 700;">At SoulArt, we are committed to turning your cherished moments into personalized, high-quality portraits that capture your unique story. With a range of styles including charcoal, pastel, and pencil sketches, each piece is crafted with precision and heart by skilled artists who value your trust. Our easy and straightforward ordering process ensures a seamless experience from start to finish, supported by secure payment options like Google Pay and PhonePe UPI, and reliable delivery partners such as Delhivery and Ekart Logistics. We prioritize exceptional customer service, offering support via phone and WhatsApp for any queries you might have. Choose SoulArt for art that resonates with you and an experience that goes beyond expectations. </p>
+      </div>
+
+      <div class="flow">
+        <div class="block">
+        <div class="image"> </div>
+        <h2>No filter</h2>
+        <p>Don’t worry, we don’t use any fancy software filters to your photo.</p>
+        </div> 
+        
+        <div class="block">
+          <div class="image" id="order"> </div>
+          <h2>Easy to order</h2>
+          <p>Choose the product, upload photo, make payment, you are set!</p>
+          </div> 
+
+          <div class="block">
+            <div class="image" id="replacement"> </div>
+            <h2>Easy Replacement</h2>
+            <p>If you receive damaged products, we will replace for free.</p>
+            </div> 
+
+            <div class="block">
+              <div class="image" id="durable"> </div>
+              <h2>Highly Durable</h2>
+              <p>Best material ensures the painting lasts for a lifetime.</p>
+              </div> 
+      
+      </div>
+    </div>
+    <section class="how-it-works">
+      <h2>How It Works</h2>
+      <p>From photo to custom portrait, our process is simple and tailored to deliver the best results.</p>
+  
+      <div class="steps-container">
+          <div class="step">
+              <div class="icon" style="background-image: url('upload.png');"></div>
+              <h3>Step 1: Upload Your Photo</h3>
+              <p>Select a photo that you’d like to turn into a beautiful portrait.</p>
+          </div>
+          
+          <div class="step">
+              <div class="icon" style="background-image: url('payment.png');"></div>
+              <h3>Step 2:Partial Payment</h3>
+              <p>Pay 40% upfront when our executive arrives, and the remaining 60% upon delivery.</p>
+          </div>
+
+          <div class="step">
+              <div class="icon" style="background-image: url('artisit.png');"></div>
+              <h3>Step 3: Our Artists Get to Work</h3>
+              <p>Our skilled artists in Kolkata and Bangalore create a custom piece just for you.</p>
+          </div>
+  
+          <div class="step">
+              <div class="icon" style="background-image: url('delivery.png');"></div>
+              <h3>Step : Delivered to Your Doorstep</h3>
+              <p>Once completed, your portrait is carefully packaged and delivered to you.</p>
+          </div>
+      </div>
+  </section>
+
+  <section class="customer-gallery-section">
+    <h2>Customer Gallery</h2>
+    <p>See how our artwork looks in real homes!</p>
+    
+    <div class="gallery-grid">
+        <div class="gallery-item">
+            <img src="">
+            <div class="overlay">
+                <p>“Absolutely love this piece in my living room!” – Sarah</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR2BS-cJ2Wn2tvlUkTh-GwkTmYcPLut5tVNQ&s" alt="Customer Artwork 2">
+            <div class="overlay">
+                <p>“This adds a whole new vibe to our space!” – Mark</p>
+            </div>
+        </div>
+        <div class="gallery-item">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDKIG0HXuycaWTsA7P9Qs6Klwz8M1zEtNGSg&s" alt="Customer Artwork 3">
+            <div class="overlay">
+                <p>“Perfect gift for our anniversary.” – Emily</p>
+            </div>
+        </div>
+        <!-- Additional images can be added here -->
+    </div>
+</section>
+
+<section class="art-preview-section">
+  <h2>Preview Your Art</h2>
+  <p>Upload a photo to see how it would look in your chosen art style!</p>
+  
+  <!-- File upload area -->
+  <div class="upload-area">
+      <input type="file" id="uploadImage" accept="image/*" onchange="displayImage(event)">
+      <label for="uploadImage" class="upload-label">Choose Photo</label>
+  </div>
+  
+  <!-- Preview container -->
+  <div class="preview-container">
+      <img id="previewImage" class="preview-image" alt="Your Art Preview" style="display: none;">
+      <button id="styleButton" class="style-button" onclick="applyArtStyle()">Apply Art Style</button>
+  </div>
+</section>
+
+
+<section class="featured-artists-section">
+  <h2>Meet Our Artists</h2>
+  <p>Get to know the talented artists behind your custom artwork.</p>
+
+  <div class="artists-grid">
+      <div class="artist-card">
+          <div class="artist-image" style="background-image: url('data:image/jpeg;base64,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');"></div>
+          <h3>Arjun Roy</h3>
+          <p>Specialty: Charcoal Sketches</p>
+          <p class="bio">Arjun brings his passion for monochrome to life in every piece. With years of experience in charcoal, he captures depth and emotion with simplicity.</p>
+      </div>
+      
+      <div class="artist-card">
+          <div class="artist-image" style="background-image: url('data:image/jpeg;base64,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');"></div>
+          <h3>Sana Gupta</h3>
+          <p>Specialty: Pastel Portraits</p>
+          <p class="bio">Known for her soft touch, Sana’s pastel portraits have a warmth and realism that clients adore. She adds a touch of magic to each piece.</p>
+      </div>
+      
+      <div class="artist-card">
+          <div class="artist-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyvnw31CYYoLdv0RM5mM_9Aub5e3IvfdaWcg&s');"></div>
+          <h3>Ravi Singh</h3>
+          <p>Specialty: Watercolor Landscapes</p>
+          <p class="bio">Ravi’s love for nature is reflected in his stunning watercolor landscapes. His work is vibrant, evocative, and brings any space to life.</p>
+      </div>
+      <!-- Add more artist cards as needed -->
+  </div>
+</section>
+
+<section class="customer-stories">
+  <h2>Customer Stories</h2>
+  <p>Hear from our happy customers about their unique experiences with us.</p>
+
+  <div class="stories-container">
+      <div class="story-card">
+          <div class="story-image" style="background-image: url('data:image/png;base64,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');"></div>
+          <blockquote>"I wanted a portrait of my late father, and the final product was beyond my expectations. It feels like he’s still here with us."</blockquote>
+          <p class="customer-name">— Priya, Bangalore</p>
+      </div>
+
+      <div class="story-card">
+          <div class="story-image" style="background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAh1BMVEX///8zMzMxMTH8/Pw1NTUuLi4jIyMrKyseHh4oKCglJSU5OTkdHR0+Pj5CQkJHR0dSUlLGxsbX19cZGRn19fXd3d3p6elPT0+vr68WFhby8vJXV1dgYGC7u7vk5OR2dnZra2ulpaWdnZ2UlJSKiorNzc1+fn6EhIRubm62traYmJgQEBBlZWVHPWCGAAAIDklEQVR4nO2dC3PiIBDHwzOQp1Fr1Kjxre35/T/fQWKv7bXGhFSBGX53M73OTaf8Z2F3WRb0PIfD4XA4HA6Hw+FwOBwOh8PhcDgcDofD4XA4HA6HPSAk/3reeLjc7sv1YrEu95vsBb3/t86x/RJCwzjbp2wUUe77hPicB3QWFW/DWr7u8fUHHUo/4hBg8UeCsfiKAQkY3r3oHlw/agO9DhgHV3HvXL+DnK2HNk9UufyGA+aDBvzRcW6xRA/tZ+Q/831F/B8PlrqHqYY04LygTfZ7FxntdA9WCSFwkvD7AoVEGB11j1aNSdxKoHSurNQ9WBVQ3uhivmqkJ2+se8CdKYP2AjEe2edulqMmH/pNIfQnukfckXlzlPiOf6nTV0tA3i7AnRRiSDObIj+acNBRISa5TQq9XctA8Zko0z3qDiAOu61CiViJ9rCMugsEMFrpHnd7zmI72BlMN5asROSNqYIJhTsd6B56a7KRgkAxTYOVJUZU8qQS9mqLwgVRU+jbsouaQwU/I4GJJTZ8idQECiNakn4vmapCNtQ99na8KToaAOhU99jbUSo6GgC4JTWpXNXTAH+te+ytGGOFtPsK1j34VqxaFElvMbOiHpUxdRPOrHCmG9qxRPMBpK+6R38f5B25skJshzMdEGVPg4kVxW9fNVYISKF79C1AM3WBAMYWpN6TPgpBYEG4eOmhEENmwYnwUK2EcSWS+yeTy/vDeDNU3h1WClfTi9ENGgOfnpV3FhL/zIKLwRN1JdZgL4FCIoZkrlvHbQ4M/t860x3MJuba8NDhWPSmQEANrtbM//QWKKZ5aq4JZU7aXyE/6VbRhGq1+wMI6NJgX+odeuzv35kZvAzFQmzfYnIb3SKaQB7usXWqgGZvoNAvuBrf6E0w8sr2rV43CPa6VTSz431jfrDRraEJ5G2CnisRU8M73DLWrVPoB4WGl0xfVPpMvihkRodDERB90k8iJLol3CPvqZAsdCu4x6lnZhpsdSu4x6FXMRGAyOgqTcVlpnyMDwD7czR5Y1GDskyp6UvCD+Z3YCJZ61wrpW4Y8yolNdyGSEo8KBaFxRo0XN6VaoehMFH9s+6Rt0QYMVOpe+PRQffQWyJXYqKQfpsf6z/zqlCvsauTHcWdjUhSm64+IW/buSHDnvbZmknHeg2GoUUW9KQRTx3LGdT4jPsLwp3Ou0V9YpkJJW8d7h+Knb0lnaWfQChsvxSxcKRWuRlJldi0XYo4Mrz89BOoanBrKZAZXgX+EelswpYK/dw+N+NV27xWFQ0MIDW/cnGLNv4UW9Oh/wOozR4Dk7XRTVB3GJA7EjG2oH7YxOJOfRjLc3ujD5vusSYhboyKEIQWL0PBmcRxsw3j2Ibu9duUJE5iePPADYMkCU0/MGymJGGSJvDn1nYMQZKG9iuMkzy9YUCQ5klsucK1VJgO8u9XocT3MM/TJDT+WLuZC8HSiIM8/B4X8SBPY+Fq7VZYEIwrKxYxqTtPa68j4mBcCAtWCq32pfJEOAzjNB8Uad2kgWWQBzDMi4EUKBQGVsfDRCjEobRiXhRpCGQSJzxrmBaD/CrQ8AaaO4zr5RfGQqK0o9AlqL4KfWKKyinLbc5Lr1VTXJlR2FGoEwgXmiYi1FcWNL/NqwH07zopvmoUlpSIf8gJen0K0+xWvTt83C7BtciaUJrvXyoHrTpz+o+PtwekIFzLrNRh8E8iDHUPsweb71UMfFWGP4xI7d3he/sW9UQMRoZ3sjXR6hkXzIb2FbzfaaFP9lvam9SM250/8b21Nmz5UA3J5WU1G0XOjy1Pnwjb2qZPNkahadj+GJgmS7Mvx/5AltIuj0MStrDrgG24mEHc7flL8udsxauCVW/ipGS+Sl8bPU3Mn6vyFe8d95VexsCQ+9ux+U51gwO1u8BV+Z+Fpof/Zcj63ZkhNM6uk91EhgXtfTsPwmhh6gcmrMpIhHj1Z7Aq5E+T6GjcdkP2JexmvS8B/4PTt7FBbrUaxxT+xgXZdzAI/CkyR6JYgHlPB/ODRjYwpCsavS/AX4eMyokBZhRT6Y3d60dQxWdv2gWKFDsJSM9blbcQOUAVHbVRpaDrXk8K3YdE54m2BEBM0K1IsXsGwLv4Gus4h0QxBe1ECFmho/FNhPjTb0eIW2ASbDU41SwOHm6+KxALMz47jxsfZ+QJM7RG/hqfvT41HT/Ev5mjtQJGR/Q8jduH5DD3CIpnPQI2XrNHR4ifwNiPn/DRAsKjrdp92NgjIPzx/kYIhDpm6LvEZPzwtTjpcFHkAdDHn+KctU3RCgge7W3mvR+C6qnw4Y8qolTrJMVPeCfrrcebEP0FwtnDP7sMobT3W1c9mO2ekIHPxZZJQ7yXv5PIi6ZP2GPMy5GOtQgBTQ/PykuzfPZ0jSSSZzbP+5Dr7BIFEAPQfF3kt4CERou6V/pZAsXvedklNPiFN3Xv49NgsH3+8bDcqg23KWP8kfMV+jQK1tOVxuO2ebYvghHldUm4nrc9kE3gdR84JD6PRslxY0L/wnw4PRWYRkKn0rM0n20m9AlpQUTBoNxkJhyxIXSdPuNVNt0vEsAZC7hPOpf5pc0CKn6YJIv9NHupLwaPzTsLRqthNt0dLzlgo1nEGKMB576QLET/D+c8CChl0exPxMPB+vQ2zYYGP+X9jfFkeMhep5vd/nQsz+vLYlFcWSwWl3NZHve77Wa6zA4vE6uucqOaroELeYYe3TscDofD4XA4HA6Hw+FwOBwOh8PhcDgcDofD4XB04C96Y3MZ+irTtAAAAABJRU5ErkJggg==');"></div>
+          <blockquote>"The attention to detail was incredible. My wedding photo turned into a painting that will be a cherished memory forever."</blockquote>
+          <p class="customer-name">— Ravi & Meena, Mumbai</p>
+      </div>
+
+      <div class="story-card">
+          <div class="story-image" style="background-image: url('data:image/png;base64,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');"></div>
+          <blockquote>"I got a sketch of my dog as a gift, and it’s now the focal point of my living room. Highly recommended!"</blockquote>
+          <p class="customer-name">— Anjali, Delhi</p>
+      </div>
+  </div>
+</section>
+
+<section class="art-quiz-section">
+  <h2>Discover Your Art Style</h2>
+  <p>Take a quick quiz to find out which art style best fits your personality!</p>
+
+  <div class="quiz-container">
+      <div class="quiz-question" id="question-container">
+          <h3 id="question-text">Which color palette do you prefer?</h3>
+          <div class="quiz-options">
+              <button onclick="nextQuestion(1)" class="quiz-option">Bold & Vibrant</button>
+              <button onclick="nextQuestion(2)" class="quiz-option">Soft & Pastel</button>
+              <button onclick="nextQuestion(3)" class="quiz-option">Monochrome</button>
+              <button onclick="nextQuestion(4)" class="quiz-option">Earthy & Natural</button>
+          </div>
+      </div>
+      <div id="result-container" style="display: none;">
+          <h3>Your Art Style:</h3>
+          <p id="result-text">Loading...</p>
+          <button onclick="restartQuiz()" class="restart-button">Take Quiz Again</button>
+      </div>
+  </div>
+</section>
+
+<section class="limited-deals">
+  <h2>Exclusive Offers & Limited-Time Deals</h2>
+  <p>Get your custom artwork at special prices. Don’t miss out on these exclusive deals!</p>
+
+  <div class="deals-container">
+      <div class="deal-card">
+          <div class="deal-image" style="background-image: url('deal1.jpg');"></div>
+          <h3>20% Off on Charcoal Portraits</h3>
+          <p>For a limited time, enjoy a 20% discount on all charcoal portraits. Perfect for timeless, black-and-white art lovers.</p>
+          <button class="claim-offer-btn">Claim Offer</button>
+      </div>
+
+      <div class="deal-card">
+          <div class="deal-image" style="background-image: url('deal2.jpg');"></div>
+          <h3>Buy 1 Get 1 Free - Pet Sketches</h3>
+          <p>Celebrate your pets! Buy one pet sketch, and get another absolutely free. Share the love with friends or family!</p>
+          <button class="claim-offer-btn">Claim Offer</button>
+      </div>
+
+      <div class="deal-card">
+          <div class="deal-image" style="background-image: url('deal3.jpg');"></div>
+          <h3>Free Shipping on Orders Over $100</h3>
+          <p>Get free shipping when you spend $100 or more on your custom artwork. Delivering right to your doorstep.</p>
+          <button class="claim-offer-btn">Claim Offer</button>
+      </div>
+  </div>
+</section>
+
+<section> 
+  <div class="contact-us">
+    <div class="contact-info">
+        <h2>Get in Touch</h2>
+        <p>We'd love to hear from you! Whether you have a question, need assistance, or want to share your feedback, feel free to reach out.</p>
+        <div class="info-item">
+            <i class="fas fa-phone-alt"></i>
+            <span>+1 234 567 890</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <span>info@yourwebsite.com</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Your Address, City, Country</span>
+        </div>
+    </div>
+    <form class="contact-form">
+        <h3>Contact Form</h3>
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit" class="button">Send Message</button>
+    </form>
+</div>
+</section>
+
+<section>
+  <div class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+        <h3 class="faq-question">What types of portraits do you offer?</h3>
+        <p class="faq-answer">We offer a variety of custom portraits, including charcoal, sketch, and digital art styles tailored to your preferences.</p>
+    </div>
+    <div class="faq-item">
+        <h3 class="faq-question">How long does it take to complete an order?</h3>
+        <p class="faq-answer">Typically, orders take 2-4 weeks to complete depending on complexity and our current workload. We will keep you updated throughout the process.</p>
+    </div>
+    <div class="faq-item">
+        <h3 class="faq-question">Can I request a revision after receiving my portrait?</h3>
+        <p class="faq-answer">Yes! We want you to be completely satisfied. You can request minor adjustments to your portrait within 7 days of receiving it.</p>
+    </div>
+    <div class="faq-item">
+        <h3 class="faq-question">What is your return policy?</h3>
+        <p class="faq-answer">Due to the custom nature of our portraits, we do not accept returns. However, if you receive a damaged product, please contact us for a replacement.</p>
+    </div>
+    <div class="faq-item">
+        <h3 class="faq-question">How do I place an order?</h3>
+        <p class="faq-answer">You can place an order through our website by selecting your desired portrait type, uploading a photo, and completing the payment process.</p>
+    </div>
+</div>
+</section>
+
+<section>
+  <footer class="footer">
+    <div class="footer-container">
+        <div class="footer-column">
+            <h3>About Us</h3>
+            <p>Custom Portrait Services specializes in personalized hand-drawn portraits tailored to your needs. We aim to bring your cherished memories to life with exceptional artistry.</p>
+        </div>
+        <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Contact Us</h3>
+            <p>Email: <a href="mailto:support@customportraits.com">support@customportraits.com</a></p>
+            <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+            <p>Address: 123 Art Lane, Kolkata, India</p>
+        </div>
+        <div class="footer-column">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook"><img src="facebook-icon.png" alt="Facebook"></a>
+                <a href="#" aria-label="Instagram"><img src="instagram-icon.png" alt="Instagram"></a>
+                <a href="#" aria-label="Twitter"><img src="twitter-icon.png" alt="Twitter"></a>
+                <a href="#" aria-label="LinkedIn"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Custom Portrait Services. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </div>
+</footer>
+</section>
+
+
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-qmqaE4D+KpSVFIYmsn4T1RSZ+gydoaeINHsPHBn7oxlzT3EL1pR2t4MQB12QKjkC"
+      crossorigin="anonymous"
+    ></script>
+    <script> 
+      const menuToggle = document.querySelector('.menu-toggle');
+    const navbarLinks = document.querySelector('.navbar ul');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navbarLinks.classList.toggle('active');
+    });
+
+
+      document.querySelectorAll('.gallery-item img').forEach(image => {
+        image.addEventListener('click', () => {
+            const lightbox = document.createElement('div');
+            lightbox.classList.add('lightbox');
+            document.body.appendChild(lightbox);
+    
+            const img = document.createElement('img');
+            img.src = image.src;
+            img.classList.add('lightbox-image');
+            lightbox.appendChild(img);
+    
+            lightbox.addEventListener('click', () => {
+                document.body.removeChild(lightbox);
+            });
+        });
+    });
+    
+      // Sample questions and results
+const questions = [
+  "Which color palette do you prefer?",
+  "What kind of art do you enjoy the most?",
+  "What type of decor best describes your home?",
+  "How do you want your art to make you feel?"
+];
+
+const results = [
+  "Bold & Vibrant Art Style - Perfect for a bold personality!",
+  "Pastel & Soft Art Style - Gentle and soothing to the eye!",
+  "Monochrome Art Style - Classic and elegant!",
+  "Natural & Earthy Art Style - Warm and grounded."
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+function nextQuestion(choice) {
+  score += choice;
+  currentQuestion++;
+
+  if (currentQuestion < questions.length) {
+      document.getElementById("question-text").innerText = questions[currentQuestion];
+  } else {
+      showResult();
+  }
+}
+
+function showResult() {
+  const resultIndex = Math.floor(score / questions.length);
+  document.getElementById("question-container").style.display = "none";
+  document.getElementById("result-container").style.display = "block";
+  document.getElementById("result-text").innerText = results[resultIndex];
+}
+
+function restartQuiz() {
+  currentQuestion = 0;
+  score = 0;
+  document.getElementById("question-container").style.display = "block";
+  document.getElementById("result-container").style.display = "none";
+  document.getElementById("question-text").innerText = questions[currentQuestion];
+}
+
+const faqItems = document.querySelectorAll('.faq-item');
+
+faqItems.forEach(item => {
+    item.addEventListener('click', () => {
+        item.classList.toggle('active');
+    });
+});
+
+function displayImage(event) {
+  const previewImage = document.getElementById('previewImage');
+  previewImage.src = URL.createObjectURL(event.target.files[0]);
+  previewImage.style.display = 'block';
+}
+
+function applyArtStyle() {
+  const previewImage = document.getElementById('previewImage');
+  // Example effect: applying grayscale and contrast filter for art style preview
+  previewImage.style.filter = 'grayscale(100%) contrast(120%)';
+  alert('Art style applied!');
+}
+
+
+
+    </script>
+  </body>
+</html>

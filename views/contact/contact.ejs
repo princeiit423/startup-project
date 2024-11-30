@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOULART</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style> 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e0c3fc, #8ec5fc);
+            padding: 20px;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            max-width: 1000px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .contact-info {
+            background-color: #000;
+            color: #fff;
+            padding: 30px;
+            width: 40%;
+            border-radius: 8px 0 0 8px;
+        }
+        
+        .contact-info h2 {
+            margin-bottom: 2rem;
+            font-size: 1.8em;
+        }
+        
+        .contact-info p {
+            margin-bottom: 2rem;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .info-item span {
+            margin-right: 10px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 3rem;
+            font-size: 1.5em;
+        }
+        
+        .contact-form {
+            background-color: #fff;
+            padding: 30px;
+            width: 60%;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        .form-group.subject label {
+            margin-bottom: 5px;
+            text-wrap:nowrap;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: nowrap;
+        }
+        
+        .radio-group input[type="radio"] {
+            margin-right: 5px;
+        }
+        
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+        
+        button {
+            background-color: #000;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: #333;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+                width: 90%;
+            }
+            
+            .contact-info,
+            .contact-form {
+                width: 100%;
+                border-radius: 8px;
+            }
+
+            .contact-info {
+                border-radius: 8px 8px 0 0;
+            }
+            .radio-group {
+                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .contact-form {
+                border-radius: 0 0 8px 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-info h2 {
+                font-size: 1.5em;
+            }
+            .radio-group {
+                display: flex;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+
+            .info-item span {
+                font-size: 0.9em;
+            }
+
+            .social-icons {
+                font-size: 1.2em;
+            }
+            
+            button {
+                font-size: 0.9em;
+                padding: 10px 15px;
+            }
+        }
+
+        /* Navbar Styling */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      transition: background 0.3s ease-in-out;
+    }
+
+    .navbar .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-decoration: none;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .navbar ul li {
+      position: relative;
+    }
+
+    .navbar ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1rem; /* Medium font size */
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s ease-in-out;
+    }
+
+    .navbar ul li a:hover {
+      color: #ffdd40;
+    }
+
+    /* Hamburger Menu */
+    .menu-toggle {
+      display: none;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: #fff;
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .menu-toggle.active div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active div:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .navbar ul {
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #1c1c1c;
+        padding: 1rem 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .navbar ul.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .navbar ul li {
+        margin: 1rem 0;
+        text-align: center;
+      }
+    }
+    </style>
+</head>
+<body>
+      <!-- Navbar -->
+  <nav class="navbar">
+    <a href="#" class="logo">Artify</a>
+    <ul>
+        <li><a href="/">Home</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+      <li><a href="/order">Order Art</a></li>
+      <li><a href="/about">About Us</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+    <div class="menu-toggle">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </nav>
+
+    <div class="contact-container">
+        <div class="contact-info">
+            <h2>Contact Information</h2>
+            <p>Say something to start a live chat!</p>
+            <div class="info-item">
+                <span><i class="fa-solid fa-phone-volume"></i> +1012 3456 789</span>
+            </div>
+            <div class="info-item">
+                <span><i class="fa-solid fa-envelope"></i> demo@gmail.com</span>
+            </div>
+            <div class="info-item">
+                <span><i class="fa-solid fa-location-pin"></i> 132 Dartmouth Street Boston, Massachusetts 02156 United States</span>
+            </div>
+            <div class="social-icons">
+                <span><i class="fa-brands fa-instagram"></i></span>
+                <span><i class="fa-brands fa-facebook"></i></span>
+                <span><i class="fa-brands fa-whatsapp"></i></span>
+            </div>
+        </div>
+        <div class="contact-form">
+            <form>
+                <div class="form-group">
+                    <input type="text" placeholder="First Name" required>
+                    <input type="text" placeholder="Last Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Email" required>
+                    <input type="tel" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group subject">
+                    <label>Select Subject?</label>
+                    <div class="radio-group">
+                        <input type="radio" name="subject" id="general1" checked>
+                        <label for="general1">General Inquiry</label>
+                        <input type="radio" name="subject" id="general2">
+                        <label for="general2">General Inquiry</label>
+                        <input type="radio" name="subject" id="general3">
+                        <label for="general3">General Inquiry</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Write your message.." required></textarea>
+                </div>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+    const navbarLinks = document.querySelector('.navbar ul');
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      navbarLinks.classList.toggle('active');
+    });
+    </script>
+</body>
+</html>
